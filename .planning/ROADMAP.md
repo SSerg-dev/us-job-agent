@@ -27,7 +27,7 @@ Milestone v1.0 delivers a local English workflow from manually pasted US vacancy
 **Plans:** 2 sequential plans, prepared for execution approval.
 
 Plans:
-- [ ] 01-01: Manual intake, local persistence and restart tracer.
+- [x] 01-01: Manual intake, local persistence and restart tracer (accepted 2026-10-09).
 - [ ] 01-02: Conservative extraction, field corrections and acceptance.
 
 ### Phase 2: Evidence-Based Selection
@@ -90,7 +90,7 @@ Execution order: 1 -> 2 -> 3 -> 4 -> 5. Phase execution requires the interactive
 
 | Phase | Plans Complete | Status | Completed |
 |---|---|---|---|
-| 1. Saved Vacancy Workflow | 0/2 | In progress | - |
+| 1. Saved Vacancy Workflow | 1/2 | In progress | - |
 | 2. Evidence-Based Selection | 0/TBD | Not started | - |
 | 3. Factual English Letters | 0/TBD | Not started | - |
 | 4. Simple Letter Lifecycle | 0/TBD | Not started | - |

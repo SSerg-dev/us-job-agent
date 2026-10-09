@@ -1,6 +1,6 @@
 # 01-01 Tracer Checkpoint
 
-2026-10-09. Status: implementation built and automated checks passed; awaiting user acceptance. Do not execute 01-02 yet. No SUMMARY claiming plan completion. User authorized an end-of-day local snapshot commit; this is not tracer acceptance and no push is requested.
+2026-10-09. Status: current manual scenario explicitly accepted by user. Checkpoint resolved; see 01-01-SUMMARY.md. Do not execute 01-02 today: user requested closing commit and stop. No push requested.
 
 ## Built
 English Angular 22.2.2/Tailwind 4.3.3 UI, pure TypeScript validation, loopback Node/SQLite API. Manual intake, reviewed fields, saved list/detail, exact source text/URL persistence. Unknown values remain unknown. Independent local GSD Core 1.15.0 installed from the existing cached package, not private HH configuration.
@@ -18,5 +18,4 @@ English Angular 22.2.2/Tailwind 4.3.3 UI, pure TypeScript validation, loopback N
 Version-1 transactional migration lives in the SQLite adapter instead of a separately deployed SQL file, avoiding a build-copy dependency. Windows launcher Start.ps1 selects bundled Node 24 without altering system Node 22. Initial CLI scaffold warned about system Node while npm was invoked; actual installation, compilation, tests and servers used Node 24 explicitly. Source-only import/read-only saved cards in this tracer; extraction and editing are next plan. node:sqlite is release-candidate stability in this runtime, isolated behind an adapter.
 
 ## User Acceptance
-Development paused for today at user request; server kept running. On resume, read account usage and confirm this tracer before proceeding. The final small fix hides misleading saved status and form when a saved card cannot be loaded; type checking and build re-passed.
-Open http://127.0.0.1:4320/vacancies. Add vacancy, paste English text, optionally fill source link and manual fields, save, refresh and reopen. Confirm exact saved content and English interface. Agent can then restart only this US test server for manual persistence acceptance. Automatic extraction is intentionally absent. Await explicit approval or issues; do not infer acceptance from automated tests.
+User stated: "Сценарий меня вполне устраивает." The manual tracer is accepted; extraction remains unimplemented. Restart persistence has automated evidence, not a claimed separate manual restart session. Development paused for today, server kept running. On resume, check usage and consider 01-02 only after a new continuation request.
