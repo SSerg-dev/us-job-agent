@@ -1,0 +1,39 @@
+@import 'tailwindcss' source(none);
+@source "./app";
+body {
+  background: #f4f6fa;
+  color: #14213d;
+  font-family: system-ui, sans-serif;
+}
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.65rem;
+  border: 1px solid #bac6d6;
+  border-radius: 0.5rem;
+  background: white;
+}
+label {
+  display: block;
+  margin-bottom: 0.9rem;
+  font-weight: 600;
+}
+button,
+.action {
+  display: inline-block;
+  padding: 0.7rem 1.1rem;
+  border-radius: 0.5rem;
+  background: #164bb2;
+  color: white;
+  cursor: pointer;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #f5a623;
+  outline-offset: 3px;
+}

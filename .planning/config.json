@@ -1,0 +1,20 @@
+{
+  "mode": "interactive",
+  "granularity": "coarse",
+  "model_profile": "inherit",
+  "runtime": "codex",
+  "resolve_model_ids": "omit",
+  "workflow": {
+    "research": true,
+    "plan_check": true,
+    "verifier": true,
+    "compact_content": true,
+    "nyquist_validation": false,
+    "auto_advance": false,
+    "response_language": "ru"
+  },
+  "planning": { "commit_docs": false },
+  "parallelization": { "enabled": false },
+  "ship": { "pr_body_sections": [] },
+  "git": { "create_tag": false }
+}
