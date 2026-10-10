@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve, extname, sep } from 'node:path';
 import { validateVacancy, ValidationError } from '../domain/vacancy.js';
 import type { VacancyStore } from './vacancy-store.js';
+import { RevisionConflict } from './vacancy-store.js';
 const json = (response: ServerResponse, status: number, value: unknown) => {
   response.writeHead(status, {
     'Content-Type': 'application/json',
@@ -49,6 +50,34 @@ export function createApp(store: VacancyStore, assetDirectory?: string) {
             return json(response, 415, { error: 'JSON required.' });
           return json(response, 201, store.create(validateVacancy(await body(request))));
         }
+        if (request.method === 'PUT' && /^\/api\/vacancies\/[^/]+$/.test(path)) {
+          if (request.headers['content-type']?.split(';')[0].trim() !== 'application/json')
+            return json(response, 415, { error: 'JSON required.' });
+          const raw = await body(request);
+          if (!raw || typeof raw !== 'object' || Array.isArray(raw))
+            throw new ValidationError('Expected reviewed fields.');
+          const { expectedRevision, ...fields } = raw as Record<string, unknown>;
+          if (!Number.isSafeInteger(expectedRevision) || Number(expectedRevision) < 1)
+            return json(response, 409, { error: 'Expected revision is required.' });
+          if ('sourceText' in fields || 'sourceUrl' in fields)
+            throw new ValidationError('Original source cannot be changed.');
+          if (
+            ['title', 'employer', 'location', 'workFormat', 'salaryRaw', 'currency', 'period'].some(
+              (field) => !(field in fields),
+            )
+          )
+            throw new ValidationError('All reviewed fields are required.');
+          const id = path.slice('/api/vacancies/'.length);
+          const current = store.get(id);
+          if (!current) return json(response, 404, { error: 'Vacancy not found.' });
+          const input = validateVacancy({
+            ...fields,
+            sourceText: current.sourceText,
+            sourceUrl: current.sourceUrl,
+          });
+          const updated = store.update(id, input, Number(expectedRevision));
+          return json(response, updated ? 200 : 404, updated ?? { error: 'Vacancy not found.' });
+        }
         return json(response, 404, { error: 'Not found.' });
       }
       if (request.method !== 'GET' || !assetDirectory)
@@ -79,9 +108,16 @@ export function createApp(store: VacancyStore, assetDirectory?: string) {
       });
       response.end(content);
     } catch (error) {
-      json(response, error instanceof ValidationError ? 400 : 500, {
-        error: error instanceof ValidationError ? error.message : 'Unable to complete request.',
-      });
+      json(
+        response,
+        error instanceof RevisionConflict ? 409 : error instanceof ValidationError ? 400 : 500,
+        {
+          error:
+            error instanceof ValidationError || error instanceof RevisionConflict
+              ? error.message
+              : 'Unable to complete request.',
+        },
+      );
     }
   });
 }

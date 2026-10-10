@@ -11,11 +11,30 @@ export interface VacancyInput {
   period: string | null;
 }
 export interface Vacancy extends VacancyInput {
+  fieldEvidence: FieldEvidence;
   id: string;
   createdAt: string;
   updatedAt: string;
   revision: number;
 }
+export const reviewFields = [
+  'title',
+  'employer',
+  'location',
+  'workFormat',
+  'salaryRaw',
+  'currency',
+  'period',
+] as const;
+export type ReviewField = (typeof reviewFields)[number];
+export interface Evidence {
+  status: 'unknown' | 'ambiguous' | 'suggested' | 'reviewed' | 'manual';
+  excerpts: string[];
+}
+export type FieldEvidence = Record<ReviewField, Evidence>;
+export type VacancyUpdate = Omit<VacancyInput, 'sourceText' | 'sourceUrl'> & {
+  expectedRevision: number;
+};
 export class ValidationError extends Error {}
 export function validateVacancy(value: unknown): VacancyInput {
   if (!value || typeof value !== 'object' || Array.isArray(value))

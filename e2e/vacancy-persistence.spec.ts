@@ -72,3 +72,62 @@ test('persistence through real UI, reload and process restart', async ({ page })
   await expect(page.getByRole('link', { name: 'Senior C# Engineer' })).toBeVisible();
   await page.screenshot({ path: 'test-results/vacancy-list.png', fullPage: true });
 });
+test('title correction and all reviewed fields survive reload and process restart', async ({
+  page,
+}) => {
+  await page.goto(`${base}/vacancies/new`);
+  const original =
+    '  Title: Engineer\r\nEmployer: Acme\r\nLocation: Boston, MA\r\nWork format: Hybrid\r\nSalary: USD 80/hour\r\n';
+  await page.getByLabel('Original vacancy text').fill(original);
+  const textareaText = await page.getByLabel('Original vacancy text').inputValue();
+  await page.getByRole('button', { name: 'Review fields', exact: true }).click();
+  await expect(page.getByLabel('Job title', { exact: true })).toHaveValue('Engineer');
+  await expect(page.getByLabel('Employer', { exact: true })).toHaveValue('Acme');
+  await expect(page.getByLabel('Location', { exact: true })).toHaveValue('Boston, MA');
+  await expect(page.getByLabel('Work format')).toHaveValue('hybrid');
+  await expect(page.getByLabel('Salary as stated')).toHaveValue('USD 80/hour');
+  await page.getByLabel('Job title', { exact: true }).fill('  Senior Engineer  ');
+  await page.getByRole('button', { name: 'Review fields', exact: true }).click();
+  await page.getByRole('button', { name: 'Keep my fields' }).click();
+  await expect(page.getByLabel('Job title', { exact: true })).toHaveValue('  Senior Engineer  ');
+  await page.getByRole('button', { name: 'Save vacancy', exact: true }).click();
+  await expect(page.getByText('Saved locally.', { exact: false })).toBeVisible();
+  const address = page.url();
+  await page.getByLabel('Employer', { exact: true }).fill('Acme reviewed');
+  await page.getByLabel('Location', { exact: true }).fill('Boston reviewed');
+  await page.getByLabel('Work format').selectOption('office');
+  await page.getByLabel('Salary as stated').fill('USD 85/hour');
+  const savedResponse = page.waitForResponse(
+    (response) =>
+      response.request().method() === 'PUT' && response.url().includes('/api/vacancies/'),
+  );
+  await page.getByRole('button', { name: 'Save changes', exact: true }).click();
+  expect((await savedResponse).status()).toBe(200);
+  await page.reload();
+  await expect(page.getByLabel('Employer', { exact: true })).toHaveValue('Acme reviewed');
+  await stop();
+  await start();
+  await page.goto(address);
+  await expect(page.getByLabel('Job title', { exact: true })).toHaveValue('  Senior Engineer  ');
+  await expect(page.getByLabel('Original vacancy text')).toHaveValue(textareaText);
+  await expect(page.getByLabel('Location', { exact: true })).toHaveValue('Boston reviewed');
+  await expect(page.getByLabel('Work format')).toHaveValue('office');
+  await expect(page.getByLabel('Salary as stated')).toHaveValue('USD 85/hour');
+});
+test('sparse and contradictory evidence remains visible without invented fields', async ({
+  page,
+}) => {
+  await page.goto(`${base}/vacancies/new`);
+  await page
+    .getByLabel('Original vacancy text')
+    .fill(
+      'Title: Engineer\nTitle: Analyst\nBuild remote monitoring systems in Boston.\nSalary: $100000',
+    );
+  await page.getByRole('button', { name: 'Review fields', exact: true }).click();
+  await expect(page.getByLabel('Job title', { exact: true })).toHaveValue('');
+  await expect(page.getByLabel('Employer', { exact: true })).toHaveValue('');
+  await expect(page.getByLabel('Work format')).toHaveValue('unknown');
+  await expect(page.getByLabel('Currency (only if stated)')).toHaveValue('');
+  await expect(page.getByLabel('Pay period (only if stated)')).toHaveValue('');
+  await expect(page.getByRole('region', { name: 'Field evidence' })).toContainText('ambiguous');
+});

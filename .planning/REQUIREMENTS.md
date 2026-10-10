@@ -1,11 +1,11 @@
 # Requirements: US Job Agent
 
-Status: scope and roadmap mapping approved; manual tracer accepted by user on 2026-10-09. Three requirements complete; remaining scope pending.
+Status: phase 1 accepted by user on 2026-10-10. Four requirements complete; remaining scope pending.
 
 ## Version 1
 ### Local intake
 - [x] **INT-01**: User can enter English vacancy text and an optional source URL without any automatic retrieval.
-- [ ] **INT-02**: User can review and correct extracted title, employer, location, work format and salary; absent or ambiguous values remain unknown.
+- [x] **INT-02**: User can review and correct extracted title, employer, location, work format and salary; absent or ambiguous values remain unknown.
 - [x] **INT-03**: User can save and reopen vacancies after page refresh and application restart, retaining the original text and source URL.
 ### Candidate evidence
 - [ ] **FACT-01**: User can review explicitly imported candidate facts with their document source and supporting excerpt before using them in letters.
@@ -35,7 +35,7 @@ LinkedIn scraping/browser automation; auto applications/messages; external LLM; 
 | Requirement | Phase | Status |
 |---|---|---|
 | INT-01 | 1 | Complete (01-01) |
-| INT-02 | 1 | Pending |
+| INT-02 | 1 | Complete (01-02) |
 | INT-03 | 1 | Complete (01-01) |
 | FACT-01 | 2 | Pending |
 | FACT-02 | 3 | Pending |
@@ -51,4 +51,4 @@ LinkedIn scraping/browser automation; auto applications/messages; external LLM; 
 | LOCAL-01 | 1 | Complete (01-01) |
 | LOCAL-02 | 5 | Pending |
 
-Coverage: 16/16 requirements mapped once; three complete in accepted plan 01-01, thirteen pending. Evidence: 01-01-SUMMARY.md. Phase 1 is not complete.
+Coverage: 16/16 requirements mapped once; four complete in accepted phase 1, twelve pending. Evidence: 01-01-SUMMARY.md and 01-02-SUMMARY.md.

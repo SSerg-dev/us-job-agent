@@ -8,9 +8,8 @@ Connect each vacancy's actual tasks to verified candidate facts without inventin
 
 ## Requirements
 ### Validated
-None yet. HH acceptance does not validate this new application.
+- Local English vacancy intake, conservative evidenced field review, manual correction and persistence accepted in phase 1 on 2026-10-10. HH acceptance is not used as evidence for this application.
 ### Active
-- [ ] Local English vacancy intake, review and persistence.
 - [ ] Explainable screening against approved US preferences.
 - [ ] Source-grounded English cover letters, regeneration, editing and copying.
 ### Out of Scope
@@ -41,4 +40,4 @@ The owner wants LinkedIn-oriented functionality isolated from HH Job Agent. Reus
 ## Evolution
 Accept the local workflow first. Evaluate permitted discovery sources or user-controlled alert imports separately; sending applications requires a new explicit scope decision.
 
-*Updated 2026-10-09. Implementation has not started.*
+*Updated 2026-10-10. Phase 1 implemented and accepted; phase 2 planning is next.*

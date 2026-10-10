@@ -3,10 +3,10 @@
 ## Overview
 Milestone v1.0 delivers a local English workflow from manually pasted US vacancy text to a saved, factual cover letter ready for manual copying. Five sequential vertical slices use Angular/Tailwind, a local Node.js/SQLite API and framework-independent TypeScript rules. Each phase includes relevant tests; phase 5 integrates acceptance, not the first testing effort.
 
-**Status:** Approved by user on 2026-10-09. Phase 1 planning requested; no implementation started.
+**Status:** Phase 1 accepted on 2026-10-10 after the user reported "it is OK" and requested the next wave. Phase 2 requires candidate-source discussion before detailed planning.
 
 ## Phases
-- [ ] **Phase 1: Saved Vacancy Workflow** - Enter, review, save and reopen vacancies locally.
+- [x] **Phase 1: Saved Vacancy Workflow** - Enter, review, save and reopen vacancies locally.
 - [ ] **Phase 2: Evidence-Based Selection** - Review candidate evidence and understand vacancy fit.
 - [ ] **Phase 3: Factual English Letters** - Generate task-specific letters from supported evidence.
 - [ ] **Phase 4: Simple Letter Lifecycle** - Regenerate, edit, preserve and copy letters safely.
@@ -24,11 +24,11 @@ Milestone v1.0 delivers a local English workflow from manually pasted US vacancy
 2. User can review and correct title, employer, location, work format and salary while absent or ambiguous fields remain unknown; original text and URL remain accessible.
 3. User can save and reopen a vacancy with identical content after page refresh and application restart.
 4. User operates an English Angular UI with a loopback-only API and local SQLite storage, without account credentials, telemetry or external AI calls.
-**Plans:** 2 sequential plans, prepared for execution approval.
+**Plans:** 2 sequential plans, implemented and accepted.
 
 Plans:
 - [x] 01-01: Manual intake, local persistence and restart tracer (accepted 2026-10-09).
-- [ ] 01-02: Conservative extraction, field corrections and acceptance.
+- [x] 01-02: Conservative extraction, corrections and acceptance (2026-10-10).
 
 ### Phase 2: Evidence-Based Selection
 **Goal:** User can review candidate evidence and understand why each vacancy fits, fails or needs review.
@@ -90,8 +90,8 @@ Execution order: 1 -> 2 -> 3 -> 4 -> 5. Phase execution requires the interactive
 
 | Phase | Plans Complete | Status | Completed |
 |---|---|---|---|
-| 1. Saved Vacancy Workflow | 1/2 | In progress | - |
-| 2. Evidence-Based Selection | 0/TBD | Not started | - |
+| 1. Saved Vacancy Workflow | 2/2 | Complete | 2026-10-10 |
+| 2. Evidence-Based Selection | 0/TBD | Awaiting candidate-source discussion | - |
 | 3. Factual English Letters | 0/TBD | Not started | - |
 | 4. Simple Letter Lifecycle | 0/TBD | Not started | - |
 | 5. Local MVP Acceptance | 0/TBD | Not started | - |
