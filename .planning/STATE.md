@@ -20,3 +20,7 @@ Latest usage reading at start of acceptance closure: 69% five-hour and 60% weekl
 Existing commits 741f2ba and 685f196 retained. Current implementation is uncommitted; no commit or push was requested today. User-approved project folder lies outside this chat's writable roots, so scoped writes and commands used escalation. Temporary patch staging is under the HH ignored .runtime directory; no HH source or private data was copied into US.
 
 Next: clarify which English candidate documents/text may be explicitly imported and the initial import format. Do not assume current permission to reuse HH candidate files or invent skills from prior chat. Preserve approved US-wide relocation, office/hybrid, no Tech Lead, no salary filter and user-reported Green Card boundaries. Then create phase-2 context and research/plans for source-backed candidate facts and explainable selection. No phase-2 implementation yet; no automatic commits, branches, subagents or model changes.
+
+
+
+
